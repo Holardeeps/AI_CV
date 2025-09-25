@@ -9,7 +9,7 @@ const ResumeCard = ({ resume: {id, companyName, jobTitle, feedback, imagePath} }
 
     useEffect(() => {
         const loadResume = async () => {
-            const blob = await fs.read('blob:http://localhost:5173/87e8ebc4-2572-4f68-9fc6-a2725b46d7cc')
+            const blob = await fs.read(imagePath)
             if(!blob) return;
             let url = URL.createObjectURL(blob)
 
