@@ -28,6 +28,7 @@ export default function Home() {
     const loadResumes = async () => {
       setLoadingResumes(true);
       const resumes = (await kv.list('resume:*', true)) as KVItem[];
+      console.log(resumes)
 
       const parsedResumes = resumes?.map((resume) => (
         JSON.parse(resume.value) as Resume
@@ -65,10 +66,9 @@ export default function Home() {
         )
       }
 
-      {!loadingResumes && resumes.length > 0 && (
+      {resumes.length > 0 && (
         <div className="resumes-section">
-          {/* <h2>{resumes[0].resumePath} na here</h2>
-          <h2>{resumes[0].imagePath} na here</h2> */}
+          {/* <h2>{resumes[0].resumePath} na  */}
           
           {
             resumes.map((resume) => (
@@ -76,16 +76,18 @@ export default function Home() {
             ))
           }
 
-          {
-            !loadingResumes && resumes.length === 0 && (
-              <div className="flex flex-col items-center justify-center mt-10 gap-4">
-                <Link to={'/upload'} className="primary-button w-fit text-xl font-semibold"></Link>
-              </div>
-            )
-          }
           
         </div>
       )}
+      {
+        !loadingResumes && resumes.length === 0 && (
+          <div className="flex flex-col items-center justify-center mt-10 gap-4">
+            <Link to={'/upload'} className="primary-button w-fit text-xl font-semibold">
+              Upload Resume
+            </Link>
+          </div>
+        )
+      }
     </section>
 
   </main>

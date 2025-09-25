@@ -6,18 +6,20 @@ import { usePuterStore } from '~/lib/puter';
 const ResumeCard = ({ resume: {id, companyName, jobTitle, feedback, imagePath} }: { resume: Resume} ) => {
     const {  fs } = usePuterStore();
     const [resumeUrl, setResumeUrl] = useState("");
-    
 
     useEffect(() => {
         const loadResume = async () => {
-            console.log(imagePath)
-            const blob = await fs.read(imagePath);
+            const blob = await fs.read('blob:http://localhost:5173/87e8ebc4-2572-4f68-9fc6-a2725b46d7cc')
             if(!blob) return;
-            let url = URL.createObjectURL(blob);
+            let url = URL.createObjectURL(blob)
+
             setResumeUrl(url)
         }
-        loadResume()
+
+        loadResume();
     }, [imagePath])
+    
+
 
   return (
     <Link to={`/resume/${id}`} className='resume-card animate-in fade-in duration-1000'>
