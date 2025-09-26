@@ -40,17 +40,20 @@ const resume = () => {
             const resumeUrl = URL.createObjectURL(pdfBlob);
 
             setResumeUrl(resumeUrl)
-
+            
+            // console.log(data.imagePath)
             const imageBlob = await fs.read(data.ImagePath);
             if(!imageBlob) return;
+            // console.log(imageBlob)
 
             const imageUrl = URL.createObjectURL(imageBlob);
+            console.log(imageUrl)
 
             setImageUrl(imageUrl);
 
             setFeedback(data.feedback);
 
-            console.log({ resumeUrl, imageUrl, feedback: data.feedback })
+            // console.log({ resumeUrl, imageUrl, feedback: data.feedback })
             
         }
 

@@ -28,13 +28,13 @@ export default function Home() {
     const loadResumes = async () => {
       setLoadingResumes(true);
       const resumes = (await kv.list('resume:*', true)) as KVItem[];
-      console.log(resumes)
+      console.log(resumes[0].value)
 
       const parsedResumes = resumes?.map((resume) => (
         JSON.parse(resume.value) as Resume
       ));
 
-      console.log(parsedResumes)
+      console.log(parsedResumes[0].imagePath)
       setResumes(parsedResumes);
       setLoadingResumes(false);
     }
@@ -68,11 +68,13 @@ export default function Home() {
 
       {resumes.length > 0 && (
         <div className="resumes-section">
-          {/* <h2>{resumes[0].resumePath} na  */}
           
           {
             resumes.map((resume) => (
+              <div className="">
+                <div className="bg-red-500 pt-8">this is the image {resume.imagePath ? 'looks' : "undefined"}</div>
               <ResumeCard key={resume.id} resume={resume} />
+              </div>
             ))
           }
           {
